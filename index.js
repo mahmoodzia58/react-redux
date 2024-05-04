@@ -1,28 +1,21 @@
-import  {createStore} from 'redux';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import {Provider} from 'react-redux'
+import counterstore from './store/index';
 
-const intial_value={
-    counter:0 ,
-    privacy:false
-}  
- const counterReducer =(store = intial_value,action)=>{
-    if(action.type === "Increment"){
-        return{...store, counter:store.counter+1}
-    }
-    else if (action.type === "Decrement"){
-        return{...store, counter:store.counter-1}
-    }
-    else if (action.type === "Add"){
-        return{...store, counter:store.counter + Number(action.payload.num)}
-    }
-    else if (action.type === "Subtract"){
-        return{...store, counter:store.counter - Number(action.payload.num)}
-    }
-    else if (action.type === "privacy_toggle"){
-        return{...store, privacy:!store.privacy}
-    }
-    console.log("action received", action)
-    return store ;
-}
-const counterstore= createStore(counterReducer)
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Provider store={counterstore}>
+    <App />
+    </Provider>
+  </React.StrictMode>
+);
 
-export default counterstore;
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
